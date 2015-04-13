@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Your Idea</h1>
+
+  <h1><%= @idea.title %></h1>
+  <p>Submitted <%= time_ago_in_words(@idea.created_at) %> ago</p>
+
+  <p class="post-body">
+    <%= image_tag @idea.image.url(:medium), class: "idea-image" %></br>
+    <%= @idea.body %></br>
+  </p>
+
+  <% like = @idea.likes.find_by_user_id(current_user.id) if user_signed_in? %>
+  <% if like %>
+    <%= link_to fa_icon("thumbs-up 4x"), idea_like_path(@idea, like), method: :delete %>
+  <% else %>
+    <%= link_to fa_icon("thumbs-o-up 4x"), idea_likes_path(@idea), method: :post %> |
+  <% end %>
+
+  <%= render "comments/comment" %>
+
+    <p>There are <%= @idea.comments.count %> Comments</p>
+
+    <% @idea.comments.each do |c| %>
+      <p><%= c.body %></p><br>
+      <p>Created : <%= time_ago_in_words(c.created_at) %> ago</p>
+
+    <% end %>
+
+
+
+</div>
