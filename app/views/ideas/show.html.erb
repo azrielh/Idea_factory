@@ -4,10 +4,21 @@
   <h1><%= @idea.title %></h1>
   <p>Submitted <%= time_ago_in_words(@idea.created_at) %> ago</p>
 
-  <p class="post-body">
+  <p>
     <%= image_tag @idea.image.url(:medium), class: "idea-image" %></br>
     <%= @idea.body %></br>
+    <p>Created By: <%= @idea.user.email %></p>
   </p>
+
+<% if user_signed_in? %>
+  <% if current_user.id != @idea.user.id %>
+    <% join = @idea.joins.find_by_user_id(current_user.id) if user_signed_in? %>
+    <% if join %>
+      <%= link_to "unJoin", [@idea, join], method: :delete %>
+    <% else %>
+      <%= link_to "Join", idea_joins_path(@idea), method: :post %>
+    <% end %>
+  <% end %>
 
   <% like = @idea.likes.find_by_user_id(current_user.id) if user_signed_in? %>
   <% if like %>
@@ -16,15 +27,22 @@
     <%= link_to fa_icon("thumbs-o-up 4x"), idea_likes_path(@idea), method: :post %> |
   <% end %>
 
+  <h3>Idea Members are: </h3></br>
+  <% @idea.joins.each do |u| %>
+    <p><%= u.user.email %></p></br>
+  <% end %>
+
   <%= render "comments/comment" %>
+<% end %>
 
-    <p>There are <%= @idea.comments.count %> Comments</p>
+  <strong><p>There are <%= @idea.comments.count %> Comments</p></strong>
 
-    <% @idea.comments.each do |c| %>
-      <p><%= c.body %></p><br>
-      <p>Created : <%= time_ago_in_words(c.created_at) %> ago</p>
+  <% @idea.comments.each do |c| %>
+    <p><%= c.body %></p><br>
+    <p>Created : <%= time_ago_in_words(c.created_at) %> ago</p>
+    <p>Created By: <%= c.user.email %></p>
 
-    <% end %>
+  <% end %>
 
 
 

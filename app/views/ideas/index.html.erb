@@ -6,5 +6,9 @@
     <h2><%= link_to i.title, idea_path(i) %></h2>
     <p><%= i.body %></p>
     <p><%= i.created_at.strftime("Created on: %B, %d, %Y") %></p>
+    <p>Created By: <%= i.user.email %></p>
+    <strong><p>There are <%= i.likes.count %> Likes </p></strong>
+    <strong><p>There are <%= i.joins.count %> Members</p></strong>
+
   </div>
 <% end %>

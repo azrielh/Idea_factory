@@ -16,7 +16,7 @@ class LikesController < ApplicationController
   def destroy
     like = current_user.likes.find params[:id]
     like.destroy
-    redirect_to like.idea, notice: "Unliked :("
+    redirect_to like.idea, alert: "Unliked :("
   end
 
 end
