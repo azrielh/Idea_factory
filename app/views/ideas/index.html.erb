@@ -1,14 +1,18 @@
 <h1>Super Awesome Idea Factory</h1>
 
+<button class="formbutton btn btn-default">Click Me to add a new idea!</button>
+<%= render "form" %>
+
 
 <% @ideas.each do |i| %>
-  <div>
-    <h2><%= link_to i.title, idea_path(i) %></h2>
-    <p><%= i.body %></p>
-    <p><%= i.created_at.strftime("Created on: %B, %d, %Y") %></p>
-    <p>Created By: <%= i.user.email %></p>
-    <strong><p>There are <%= i.likes.count %> Likes </p></strong>
-    <strong><p>There are <%= i.joins.count %> Members</p></strong>
-
+  <div class="ideas_index">
+    <div class="container">
+      <h2><%= link_to i.title, idea_path(i) %></h2>
+      <p><%= i.body %></p>
+      <p><%= i.created_at.strftime("Created on: %B, %d, %Y") %></p>
+      <p>Created By: <%= i.user.email %></p>
+      <strong><p>There are <%= i.likes.count %> Likes </p></strong>
+      <strong><p>There are <%= i.joins.count %> Members</p></strong>
+    </div>
   </div>
 <% end %>

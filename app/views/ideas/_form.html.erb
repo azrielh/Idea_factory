@@ -1,26 +1,28 @@
-<%= form_for @idea do |p| %>
+<div class="newform">
+  <%= form_for @idea do |p| %>
 
-  <% if @idea.errors.any? %>
-    <ul>
-    <% @idea.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+    <% if @idea.errors.any? %>
+      <ul>
+      <% @idea.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
     <% end %>
-    </ul>
+
+    <p>
+      <%= p.label :title, "Title" %>
+      <%= p.text_field :title, placeholder: "Add super awesome idea here", class: "form-control" %>
+    </p>
+    <br>
+    <p>
+      <%= p.label :body, "Content" %>
+      <%= p.text_area :body, placeholder: "Write a description of the Idea", class: "form-control" %>
+    </p>
+    <br>
+      <%= p.file_field :image %>
+    <br>
+
+    <%= p.submit "Submit", :class => "btn btn-default" %>
+
   <% end %>
-
-  <p>
-    <%= p.label :title, "Title" %>
-    <%= p.text_field :title, placeholder: "Add super awesome idea here", class: "form-control" %>
-  </p>
-  <br>
-  <p>
-    <%= p.label :body, "Content" %>
-    <%= p.text_area :body, placeholder: "Write a description of the Idea", class: "form-control" %>
-  </p>
-  <br>
-    <%= p.file_field :image %>
-  <br>
-
-  <%= p.submit "Submit", :class => "btn btn-default" %>
-
-<% end %>
+</div>

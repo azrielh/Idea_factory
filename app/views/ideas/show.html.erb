@@ -12,20 +12,22 @@
 
 <% if user_signed_in? %>
   <% if current_user.id != @idea.user.id %>
+    <% like = @idea.likes.find_by_user_id(current_user.id) if user_signed_in? %>
+    <% if like %>
+      <%= link_to fa_icon("thumbs-up 3x"), idea_like_path(@idea, like), method: :delete %>
+    <% else %>
+      <%= link_to fa_icon("thumbs-o-up 3x"), idea_likes_path(@idea), method: :post %> |
+    <% end %>
+
     <% join = @idea.joins.find_by_user_id(current_user.id) if user_signed_in? %>
     <% if join %>
-      <%= link_to "unJoin", [@idea, join], method: :delete %>
+      <%= link_to "Remove yourself from the Idea", [@idea, join], method: :delete %>
     <% else %>
-      <%= link_to "Join", idea_joins_path(@idea), method: :post %>
+      <%= link_to "Join Idea", idea_joins_path(@idea), method: :post %>
     <% end %>
+
   <% end %>
 
-  <% like = @idea.likes.find_by_user_id(current_user.id) if user_signed_in? %>
-  <% if like %>
-    <%= link_to fa_icon("thumbs-up 4x"), idea_like_path(@idea, like), method: :delete %>
-  <% else %>
-    <%= link_to fa_icon("thumbs-o-up 4x"), idea_likes_path(@idea), method: :post %> |
-  <% end %>
 
   <h3>Idea Members are: </h3></br>
   <% @idea.joins.each do |u| %>

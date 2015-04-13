@@ -14,3 +14,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).ready(function() {
+
+  $('.newform').hide();
+
+  $('.formbutton').click(function() {
+    $('.newform').slideToggle();
+  });
+
+
+});
