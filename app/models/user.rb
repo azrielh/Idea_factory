@@ -13,5 +13,4 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :liked_ideas, through: :likes, source: :idea
 
-
 end

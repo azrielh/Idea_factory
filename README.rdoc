@@ -1,5 +1,9 @@
 == Idea Factory
 
 This is the awesome app for brainstorming and add amazing ideas to a common area.
-Where people can add to, join and like
+Where people can add to, join and like.
 
+one-to-many and many-to-many relationships
+comments, likes and paperclip as an image saver.
+
+Quiz number two - completed after the 3 - Weeks of the bootcamp

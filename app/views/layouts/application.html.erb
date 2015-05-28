@@ -12,7 +12,7 @@
     <div class="container">
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><%= link_to "All Ideas", root_path, class: "btn btn-success" %></li>
-        <li class="active"><%= link_to "New Idea", new_idea_path, class: "btn btn-success" %></li>
+        <li class="active"><%#= link_to "New Idea", new_idea_path, class: "btn btn-success" %></li>
         <li> </li>
         <% if user_signed_in? %>
           <li><h3>Welcome <%= current_user.email %></h3><li>
